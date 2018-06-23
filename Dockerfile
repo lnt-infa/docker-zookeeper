@@ -6,6 +6,10 @@ MAINTAINER LNT
 
 USER root
 
+ARG ZOOKEEPER_VERSION
+ENV ZOOKEEPER_VERSION=${ZOOKEEPER_VERSION:-3.4.12}
+
+
 # install dev tools
 RUN yum clean all; \
     rpm --rebuilddb; \
@@ -31,8 +35,8 @@ RUN rm /usr/bin/java && ln -s $JAVA_HOME/bin/java /usr/bin/java
 
 
 # download zookeeper
-RUN curl -s http://www.eu.apache.org/dist/zookeeper/zookeeper-3.4.11/zookeeper-3.4.11.tar.gz | tar -xz -C /usr/local/
-RUN cd /usr/local && ln -s zookeeper-3.4.11 zookeeper
+RUN curl -s http://www.eu.apache.org/dist/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz | tar -xz -C /usr/local/
+RUN cd /usr/local && ln -s zookeeper-${ZOOKEEPER_VERSION} zookeeper
 ENV ZOO_HOME /usr/local/zookeeper
 ENV PATH $PATH:$ZOO_HOME/bin
 #RUN mv $ZOO_HOME/conf/zoo_sample.cfg $ZOO_HOME/conf/zoo.cfg
