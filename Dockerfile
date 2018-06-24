@@ -1,7 +1,8 @@
 # Creates pseudo distributed hadoop 2.7.1
 #
 
-FROM sequenceiq/pam:centos-6.5
+#FROM sequenceiq/pam:centos-6.5
+FROM centos:7.4.1708
 MAINTAINER LNT
 
 USER root
